@@ -1,0 +1,24 @@
+/* Monitor land transfer from Sandbox address - ERC-721 Token Transfers (with Token ID)
+Sandbox address: https://etherscan.io/address/0x50f5474724e0ee42d9a4e711ccfb275809fd6d4a
+*/
+
+stream SandboxMonitor_landtransfer
+from TokenTransfers
+where @to == SandboxAddress || @from == SandboxAddress
+process
+  let isCrystalProviderDataReady = false
+  let crystalProviderData = {percentRiskScore: "0", decimalRiskScore: {value: 0, decimals: 0}, targetName: "", targetType: "", signals: {atm: "", darkMarket: "", darkService: "", exchange: "", gambling: "", illegalService: "", marketplace: "", miner: "", mixer: "", payment: "", ransom: "", riskyExchange: "", scam: "", stolenCoins: "", trustedExchange: "", wallet: ""}}
+  let executionTarget = SandboxAddress
+  let counterpartyAddress = 0x0
+  if @is_erc721 then counterpartyAddress = @from
+  else counterpartyAddress = @to end
+  let txInfo = { txHash: @tx_hash }
+  let transfer_type = ""
+  if @to == executionTarget then
+    transfer_type = "deposit"
+  elseif @from == executionTarget then
+    transfer_type = "withdraw"
+  end
+  emit { @from, @to, @value, txInfo, name: @erc721.name, symbol: @erc721.symbol, decimals: @erc721.token_id, transfer_type }
+end
+
