@@ -9,4 +9,6 @@ Hackathon: https://gitcoin.co/issue/parsiq/gitcoin2021/1/100026833
 2. Monitor top 5 holder transfer land to Sandbox address. 
 - Monitor ERC-721 Token Transfers. 
 
+3. Monitor land transfer from Sandbox address - ERC-721 Token Transfers (with Token ID). 
+
 Sandbox address: https://etherscan.io/address/0x50f5474724e0ee42d9a4e711ccfb275809fd6d4a. 
