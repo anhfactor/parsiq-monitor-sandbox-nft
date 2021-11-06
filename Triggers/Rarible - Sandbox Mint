@@ -1,0 +1,13 @@
+/* Monitor each lazily minted NFT minted on Ethereum blockchain (first sale of a lazily minted NFT) 
+Sandbox address: https://etherscan.io/address/0x50f5474724e0ee42d9a4e711ccfb275809fd6d4a
+Using Minter Events method from ABI sandbox and upload to User Streams
+You can use rarible to buy sandbox land
+*/
+
+stream SandboxMint
+from ETH_sandbox_Minter_Events
+where @contract == SandboxAddress
+
+process
+  emit { @contract, @block, message: "NFT Sandbox land minted on Rarible "  }
+end
